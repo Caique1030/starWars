@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { InputLabel, Input, Select, MenuItem } from '@mui/material';
+import { InputLabel } from '@mui/material';
 import PlanetsContext from '../context/PlanetsContext';
 
-function InputO() {
+function Input() {
   const filterColum = ['population',
     'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const filterNumber = ['escolhe', 'maior que', 'menor que', 'igual a'];
@@ -16,7 +16,7 @@ function InputO() {
     <div>
       <InputLabel htmlFor="name">
         Filtrar por nome:
-        <Input
+        <input
           name="name"
           data-testid="name-filter"
           type="text"
@@ -25,29 +25,29 @@ function InputO() {
       </InputLabel>
       <InputLabel htmlFor="colum filter">
         Colum filter:
-        <Select
+        <select
           data-testid="column-filter"
           onChange={ ({ target }) => setSelectCollum(target.value) }
         >
           {verifyLength() === true ? filterColum
             .filter((element) => element !== selectCollum)
-            .map((element, index) => <MenuItem key={ index }>{element}</MenuItem>)
+            .map((element, index) => <option key={ index }>{element}</option>)
             : filterColum
-              .map((element, index) => <MenuItem key={ index }>{element}</MenuItem>)}
-        </Select>
+              .map((element, index) => <option key={ index }>{element}</option>)}
+        </select>
       </InputLabel>
       <InputLabel htmlFor="number">
         Number filter:
-        <Select
+        <select
           data-testid="comparison-filter"
           onChange={ ({ target }) => setSelectNumber(target.value) }
         >
-          {filterNumber.map((element) => <MenuItem key={ element }>{element}</MenuItem>)}
-        </Select>
+          {filterNumber.map((element) => <option key={ element }>{element}</option>)}
+        </select>
       </InputLabel>
       <InputLabel htmlFor="value">
         Value filter:
-        <Input
+        <input
           type="number"
           data-testid="value-filter"
           onChange={ ({ target }) => setNumber(target.value) }
@@ -57,4 +57,4 @@ function InputO() {
   );
 }
 
-export default InputO;
+export default Input;

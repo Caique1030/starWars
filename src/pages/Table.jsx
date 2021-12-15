@@ -47,7 +47,6 @@ function TableO() {
         onClick={ () => handleClick() }
         variant="contained"
         type="button"
-        style={ { display: 'flex', justifyContent: 'flex-end', marginLeft: '340px' } }
       >
         Pesquisar
       </Button>

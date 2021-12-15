@@ -1,55 +1,60 @@
 import React, { useContext } from 'react';
+import { InputLabel, Input, Select, MenuItem } from '@mui/material';
 import PlanetsContext from '../context/PlanetsContext';
 
-function Input() {
+function InputO() {
   const filterColum = ['population',
     'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const filterNumber = ['escolhe', 'maior que', 'menor que', 'igual a'];
-  const { setInput, setSelectCollum, setSelectNumber,
-    setNumber, verifyLength, selectCollum } = useContext(PlanetsContext);
+  const { setInput,
+    setSelectCollum,
+    setSelectNumber,
+    setNumber,
+    verifyLength,
+    selectCollum } = useContext(PlanetsContext);
   return (
     <div>
-      <label htmlFor="name">
+      <InputLabel htmlFor="name">
         Filtrar por nome:
-        <input
+        <Input
           name="name"
           data-testid="name-filter"
           type="text"
           onChange={ ({ target }) => setInput(target.value) }
         />
-      </label>
-      <label htmlFor="colum filter">
+      </InputLabel>
+      <InputLabel htmlFor="colum filter">
         Colum filter:
-        <select
+        <Select
           data-testid="column-filter"
           onChange={ ({ target }) => setSelectCollum(target.value) }
         >
           {verifyLength() === true ? filterColum
             .filter((element) => element !== selectCollum)
-            .map((element, index) => <option key={ index }>{element}</option>)
+            .map((element, index) => <MenuItem key={ index }>{element}</MenuItem>)
             : filterColum
-              .map((element, index) => <option key={ index }>{element}</option>)}
-        </select>
-      </label>
-      <label htmlFor="number">
+              .map((element, index) => <MenuItem key={ index }>{element}</MenuItem>)}
+        </Select>
+      </InputLabel>
+      <InputLabel htmlFor="number">
         Number filter:
-        <select
+        <Select
           data-testid="comparison-filter"
           onChange={ ({ target }) => setSelectNumber(target.value) }
         >
-          {filterNumber.map((element) => <option key={ element }>{element}</option>)}
-        </select>
-      </label>
-      <label htmlFor="value">
+          {filterNumber.map((element) => <MenuItem key={ element }>{element}</MenuItem>)}
+        </Select>
+      </InputLabel>
+      <InputLabel htmlFor="value">
         Value filter:
-        <input
+        <Input
           type="number"
           data-testid="value-filter"
           onChange={ ({ target }) => setNumber(target.value) }
         />
-      </label>
+      </InputLabel>
     </div>
   );
 }
 
-export default Input;
+export default InputO;

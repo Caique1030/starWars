@@ -1,9 +1,17 @@
 import React, { useContext } from 'react';
-import PlanetsContext from '../context/PlanetsContext';
-import Input from '../components/Input';
-import './Table.css';
+import Button from '@mui/material/Button';
 
-function Table() {
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import Paper from '@mui/material/Paper';
+import TableHead from '@mui/material/TableHead';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Input from '../components/Input';
+import PlanetsContext from '../context/PlanetsContext';
+
+function TableO() {
   const
     { data,
       selectCollum,
@@ -34,46 +42,50 @@ function Table() {
   return (
     <fieldset>
       <Input />
-      <button
+      <Button
         data-testid="button-filter"
         onClick={ () => handleClick() }
+        variant="contained"
         type="button"
+        style={ { display: 'flex', justifyContent: 'flex-end', marginLeft: '340px' } }
       >
-        Button
-      </button>
-      <table className="table">
-        <thead>
-          <tr>
-            {data.length !== 0 && Object.keys(data[0])
-              .filter((element) => element !== 'residents')
+        Pesquisar
+      </Button>
+      <TableContainer component={ Paper }>
+        <Table sx={ { minWidth: 650 } } size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              {data.length !== 0 && Object.keys(data[0])
+                .filter((element) => element !== 'residents')
+                .map((element, index) => (
+                  <th className="th" key={ index }>{element}</th>
+                ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredArray(data, selectCollum, selectNumber, inputNumber)
               .map((element, index) => (
-                <th className="th" key={ index }>{element}</th>
+                <TableRow key={ index }>
+                  <TableCell className="tr">{element.name}</TableCell>
+                  <TableCell className="tr">{element.rotation_period}</TableCell>
+                  <TableCell className="tr">{element.orbital_period}</TableCell>
+                  <TableCell className="tr">{element.diameter}</TableCell>
+                  <TableCell className="tr">{element.climate}</TableCell>
+                  <TableCell className="tr">{element.gravity}</TableCell>
+                  <TableCell className="tr">{element.terrain}</TableCell>
+                  <TableCell className="tr">{element.surface_water}</TableCell>
+                  <TableCell className="tr">{element.population}</TableCell>
+                  <TableCell className="tr">{element.films}</TableCell>
+                  <TableCell className="tr">{element.created}</TableCell>
+                  <TableCell className="tr">{element.edited}</TableCell>
+                  <TableCell className="tr">{element.url}</TableCell>
+                </TableRow>
               ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredArray(data, selectCollum, selectNumber, inputNumber)
-            .map((element, index) => (
-              <tr key={ index }>
-                <td className="tr">{element.name}</td>
-                <td className="tr">{element.rotation_period}</td>
-                <td className="tr">{element.orbital_period}</td>
-                <td className="tr">{element.diameter}</td>
-                <td className="tr">{element.climate}</td>
-                <td className="tr">{element.gravity}</td>
-                <td className="tr">{element.terrain}</td>
-                <td className="tr">{element.surface_water}</td>
-                <td className="tr">{element.population}</td>
-                <td className="tr">{element.films}</td>
-                <td className="tr">{element.created}</td>
-                <td className="tr">{element.edited}</td>
-                <td className="tr">{element.url}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </fieldset>
   );
 }
 
-export default Table;
+export default TableO;
